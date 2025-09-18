@@ -12,6 +12,9 @@ This repository contains multiple Tailwind CSS projects demonstrating grid layou
 
 ## 📂 File Structure
 ---
+## 📄 Tailwind CSS Cheatsheet (External)
+
+👉 [View PDF on Google Drive](https://drive.google.com/file/d/1H5Iwf4oNwknt3EPyDx3rZjmzJWeNtP4g/view?usp=drive_link)
 
 ## 🚀 Features
 
