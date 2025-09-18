@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <meta charset="UTF-8" /> <!-- Sets character encoding to UTF-8 -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Makes layout responsive on mobile -->
+   <title>Tailwind CSS Offline Cheat Sheet</title>
+   <!-- Link to local Tailwind CSS file (must be compiled with CLI or build tool) -->
+   <link href="tailwind.css" rel="stylesheet">
+   <style>
+      body {
+         font-family: sans-serif;
+      }
+
+      /* Fallback font if Tailwind fails */
+      section {
+         margin-bottom: 3rem;
+      }
+
+      /* Space between sections */
+      h2 {
+         font-size: 1.5rem;
+         margin-top: 2rem;
+      }
+
+      /* Section headings */
+      h3 {
+         font-size: 1.2rem;
+         margin-top: 1rem;
+      }
+
+      /* Subheadings */
+      .example {
+         border: 1px solid #ddd;
+         padding: 1rem;
+         margin-top: 0.5rem;
+      }
+
+      /* Example box styling */
+   </style>
+</head>
+
+<body class="p-6 bg-gray-50">
+   <!-- p-6 = padding on all sides (1.5rem), bg-gray-50 = very light gray background -->
+
+   <h1 class="text-3xl font-bold mb-6">
+      <!-- text-3xl = large text size, font-bold = bold weight, mb-6 = margin-bottom 1.5rem -->
+      Tailwind CSS Offline Cheat Sheet
+   </h1>
+
+   <!-- Styling with utility classes -->
+   <section>
+      <h2>Styling with Utility Classes</h2>
+      <div class="example bg-blue-500 text-white p-4 rounded">
+         <!-- bg-blue-500 = medium blue background -->
+         <!-- text-white = white text -->
+         <!-- p-4 = padding 1rem -->
+         <!-- rounded = small border radius on all corners -->
+         This box uses <code>bg-blue-500 text-white p-4 rounded</code>
+      </div>
+   </section>
+
+   <!-- Hover, focus, states -->
+   <section>
+      <h2>Hover, Focus, and Other States</h2>
+      <button class="bg-green-500 hover:bg-green-700 focus:ring-2 focus:ring-green-300 text-white px-4 py-2 rounded">
+         <!-- bg-green-500 = medium green background -->
+         <!-- hover:bg-green-700 = darker green background on hover -->
+         <!-- focus:ring-2 = 2px outline ring on focus -->
+         <!-- focus:ring-green-300 = light green ring color -->
+         <!-- text-white = white text -->
+         <!-- px-4 = horizontal padding 1rem -->
+         <!-- py-2 = vertical padding 0.5rem -->
+         <!-- rounded = small border radius -->
+         Hover & Focus Me
+      </button>
+   </section>
+
+   <!-- Responsive design -->
+   <section>
+      <h2>Responsive Design</h2>
+      <div class="bg-purple-500 text-white p-4 sm:bg-blue-500 md:bg-green-500 lg:bg-red-500">
+         <!-- bg-purple-500 = purple background (default) -->
+         <!-- sm:bg-blue-500 = blue background at small screens (≥640px) -->
+         <!-- md:bg-green-500 = green background at medium screens (≥768px) -->
+         <!-- lg:bg-red-500 = red background at large screens (≥1024px) -->
+         <!-- text-white = white text -->
+         <!-- p-4 = padding 1rem -->
+         Resize the window to see background color change at breakpoints.
+      </div>
+   </section>
+
+   <!-- Dark mode -->
+   <section class="dark">
+      <h2>Dark Mode</h2>
+      <div class="bg-white dark:bg-gray-800 dark:text-white p-4 rounded">
+         <!-- bg-white = white background in light mode -->
+         <!-- dark:bg-gray-800 = dark gray background in dark mode -->
+         <!-- dark:text-white = white text in dark mode -->
+         <!-- p-4 = padding 1rem -->
+         <!-- rounded = small border radius -->
+         This box changes in dark mode.
+      </div>
+   </section>
+
+   <!-- Theme variables -->
+   <section>
+      <h2>Theme Variables (Custom Colors, Fonts)</h2>
+      <p class="text-primary font-custom">
+         <!-- text-primary = custom color from tailwind.config.js -->
+         <!-- font-custom = custom font from tailwind.config.js -->
+         Custom theme colors/fonts are set in tailwind.config.js
+      </p>
+   </section>
+
+   <!-- Colors -->
+   <section>
+      <h2>Colors</h2>
+      <div class="flex gap-2">
+         <!-- flex = flexbox layout -->
+         <!-- gap-2 = 0.5rem gap between children -->
+         <div class="w-12 h-12 bg-red-500"></div> <!-- 3rem square, red background -->
+         <div class="w-12 h-12 bg-green-500"></div> <!-- 3rem square, green background -->
+         <div class="w-12 h-12 bg-blue-500"></div> <!-- 3rem square, blue background -->
+      </div>
+   </section>
+
+   <!-- Adding custom styles -->
+   <section>
+      <h2>Adding Custom Styles</h2>
+      <p>Use <code>@layer</code> in your CSS to extend Tailwind.</p>
+   </section>
+
+   <!-- Detecting classes in source files -->
+   <section>
+      <h2>Detecting Classes in Source Files</h2>
+      <p>Configure <code>content</code> in tailwind.config.js to scan your HTML/JSX files.</p>
+   </section>
+
+   <!-- Functions and directives -->
+   <section>
+      <h2>Functions & Directives</h2>
+      <p>Use <code>@tailwind base;</code>, <code>@tailwind components;</code>, <code>@tailwind utilities;</code> in your
+         CSS entry file.</p>
+   </section>
+
+   <!-- Base Styles: Preflight -->
+   <section>
+      <h2>Base Styles: Preflight</h2>
+      <p>Tailwind applies a modern CSS reset automatically.</p>
+   </section>
+
+   <!-- Layout examples -->
+   <section>
+      <h2>Layout Utilities</h2>
+      <div class="aspect-[16/9] bg-gray-300">aspect-ratio</div>
+      <!-- aspect-[16/9] = fixed aspect ratio 16:9 -->
+      <!-- bg-gray-300 = light gray background -->
+
+      <div class="columns-3 gap-4">
+         <!-- columns-3 = 3 CSS columns -->
+         <!-- gap-4 = 1rem gap between columns -->
+         <p class="bg-gray-200">Column 1</p>
+         <p class="bg-gray-300">Column 2</p>
+         <p class="bg-gray-400">Column 3</p>
+      </div>
+
+      <div class="flex gap-2 mt-4">
+         <!-- flex = flexbox -->
+         <!-- gap-2 = 0.5rem gap -->
+         <!-- mt-4 = margin-top 1rem -->
+         <div class="w-16 h-16 bg-red-300"></div> <!-- 4rem square, light red -->
+         <div class="w-16 h-16 bg-green-300"></div> <!-- 4rem square, light green -->
+      </div>
+   </section>
+
+   <!-- Flexbox & Grid -->
+   <section>
+      <h2>Flexbox & Grid</h2>
+      <div class="flex gap-2">
+         <div class="flex-1 bg-blue-200 p-2">flex-1</div> <!-- flex-1 = grow equally -->
+         <div class="flex-1 bg-blue-400 p-2">flex-1</div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2 mt-4">
+         <!-- grid = CSS grid -->
+         <!-- grid-cols-3 = 3 equal columns -->
+         <!-- gap-2 = 0.5rem gap -->
+         <!-- mt-4 = margin-top 1rem -->
+         <div class="bg-yellow-200 p-2">1</div>
+         <div class="bg-yellow-300 p-2">2</div>
+         <div class="bg-yellow-400 p-2">3</div>
+      </div>
+   </section>
+
+   <!-- Spacing -->
+   <section>
+      <h2>Spacing</h2>
+      <div class="p-4 m-4 bg-gray-200">
+         <!-- p-4 = padding 1rem -->
+         <!-- m-4 = margin 1rem -->
+         <!-- bg-gray-200 = light gray -->
+         Padding & Margin
+      </div>
+   </section>
+
+   <!-- Sizing -->
+   <section>
+      <h2>Sizing</h2>
+      <div class="w-32 h-16 bg-pink-300">
+         <!-- w-32 = width 8rem -->
+         <!-- h-16 = height 4rem -->
+         <!-- bg-pink-300 = light pink -->
+         Width & Height
+      </div>
+   </section>
+
+   <!-- Typography -->
+   <section>
+      <h2>Typography</h2>
+      <p class="font-serif text-lg font-bold tracking-wide">
+         <!-- font-serif = use a serif font family -->
+         <!-- text-lg = large text size (1.125rem) -->
+         <!-- font-bold = bold weight -->
+         <!-- tracking-wide = increased letter spacing -->
+         Custom font, size, weight, spacing
+      </p>
+      <p class="underline decoration-red-500 decoration-4 underline-offset-4">
+         <!-- underline = underline the text -->
+         <!-- decoration-red-500 = underline color red -->
+         <!-- decoration-4 = underline thickness 4px -->
+         <!-- underline-offset-4 = space between text and underline -->
+         Underlined text
+      </p>
+   </section>
+
+   <!-- Backgrounds -->
+   <section>
+      <h2>Backgrounds</h2>
+      <div class="bg-gradient-to-r from-blue-400 to-purple-500 text-white p-4">
+         <!-- bg-gradient-to-r = gradient background from left to right -->
+         <!-- from-blue-400 = gradient start color -->
+         <!-- to-purple-500 = gradient end color -->
+         <!-- text-white = white text -->
+         <!-- p-4 = padding 1rem -->
+         Gradient Background
+      </div>
+   </section>
+
+   <!-- Borders -->
+   <section>
+      <h2>Borders</h2>
+      <div class="border-4 border-dashed border-red-500 p-4">
+         <!-- border-4 = 4px border width -->
+         <!-- border-dashed = dashed border style -->
+         <!-- border-red-500 = red border color -->
+         <!-- p-4 = padding 1rem -->
+         Dashed Border
+      </div>
+   </section>
+
+</body>
+
+</html>

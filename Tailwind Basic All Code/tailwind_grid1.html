@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <meta charset="UTF-8" /> <!-- Standard UTF-8 encoding -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Mobile friendly scaling -->
+   <title>Tailwind Grid Masterclass</title>
+   <!-- Offline: link a compiled Tailwind CSS build here -->
+   <link rel="stylesheet" href="tailwind.css" />
+   <style>
+      /* Demo helpers (optional, for nicer cards and labels) */
+      .card {
+         background: white;
+         border: 1px solid #e5e7eb;
+         border-radius: .75rem;
+         padding: 1rem;
+      }
+
+      .chip {
+         font-size: .75rem;
+         padding: .125rem .5rem;
+         border-radius: 9999px;
+         background: #eef2ff;
+         color: #3730a3;
+         border: 1px solid #c7d2fe;
+      }
+   </style>
+</head>
+
+<body class="min-h-dvh bg-gray-50 text-gray-900 antialiased">
+   <!-- Page container -->
+   <div class="mx-auto max-w-7xl px-4 py-8">
+      <header class="mb-8">
+         <h1 class="text-3xl font-bold tracking-tight">Tailwind CSS Grid Masterclass</h1>
+         <p class="mt-2 text-gray-600">Learn every core Grid utility, advanced patterns (areas, subgrid), and smooth
+            animations — all with Tailwind.</p>
+         <nav class="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+            <!-- Quick section anchors -->
+            <a class="chip text-center" href="#grid-basics">Grid basics</a>
+            <a class="chip text-center" href="#tracks">Tracks & repeat</a>
+            <a class="chip text-center" href="#auto-placement">Auto-placement & flow</a>
+            <a class="chip text-center" href="#spanning">Spanning & start/end</a>
+            <a class="chip text-center" href="#gaps">Gaps</a>
+            <a class="chip text-center" href="#alignment">Alignment</a>
+            <a class="chip text-center" href="#areas">Named areas</a>
+            <a class="chip text-center" href="#subgrid">Subgrid</a>
+            <a class="chip text-center" href="#responsive">Responsive grids</a>
+            <a class="chip text-center" href="#arbitrary">Arbitrary values</a>
+            <a class="chip text-center" href="#animations">Animations</a>
+            <a class="chip text-center" href="#flex-vs-grid">Flex vs Grid (quick)</a>
+         </nav>
+      </header>
+
+      <!-- Section: Grid basics -->
+      <section id="grid-basics" class="mb-12">
+         <h2 class="text-2xl font-semibold">Grid basics</h2>
+         <p class="mt-1 text-gray-600">Start a grid container, define columns/rows with utilities, and place items into
+            cells.</p>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <!-- grid + grid-cols-* -->
+            <div class="card">
+               <h3 class="font-medium">grid + grid-cols-3</h3>
+               <p class="text-sm text-gray-600">Three equal columns using fractional tracks.</p>
+               <div class="mt-3 grid grid-cols-3 gap-2">
+                  <!-- grid = display: grid; grid-cols-3 = 3 equal columns; gap-2 = .5rem gaps -->
+                  <div class="h-16 rounded bg-indigo-100 flex items-center justify-center">1</div>
+                  <div class="h-16 rounded bg-indigo-200 flex items-center justify-center">2</div>
+                  <div class="h-16 rounded bg-indigo-300 flex items-center justify-center">3</div>
+                  <div class="h-16 rounded bg-indigo-100 flex items-center justify-center">4</div>
+                  <div class="h-16 rounded bg-indigo-200 flex items-center justify-center">5</div>
+                  <div class="h-16 rounded bg-indigo-300 flex items-center justify-center">6</div>
+               </div>
+            </div>
+
+            <!-- grid-rows-* -->
+            <div class="card">
+               <h3 class="font-medium">grid + grid-rows-3</h3>
+               <p class="text-sm text-gray-600">Three equal rows; we also add two columns for a 2x3 grid.</p>
+               <div class="mt-3 grid grid-cols-2 grid-rows-3 gap-2">
+                  <!-- grid-rows-3 = 3 equal rows -->
+                  <div class="rounded bg-emerald-100 p-2">A</div>
+                  <div class="rounded bg-emerald-200 p-2">B</div>
+                  <div class="rounded bg-emerald-300 p-2">C</div>
+                  <div class="rounded bg-emerald-100 p-2">D</div>
+                  <div class="rounded bg-emerald-200 p-2">E</div>
+                  <div class="rounded bg-emerald-300 p-2">F</div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Tracks & repeat -->
+      <section id="tracks" class="mb-12">
+         <h2 class="text-2xl font-semibold">Tracks and repeat()</h2>
+         <p class="mt-1 text-gray-600">Use built-in scales or arbitrary values to express complex track sizing like
+            repeat(), minmax(), auto-fit/fill.</p>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <!-- grid-cols utilities up to 12 -->
+            <div class="card">
+               <h3 class="font-medium">grid-cols-{n}</h3>
+               <p class="text-sm text-gray-600">Tailwind includes <code>grid-cols-1..12</code>. Below shows 4 columns.
+               </p>
+               <div class="mt-3 grid grid-cols-4 gap-2">
+                  <!-- grid-cols-4 = repeat(4, minmax(0, 1fr)) -->
+                  <div class="h-12 rounded bg-sky-100">1</div>
+                  <div class="h-12 rounded bg-sky-200">2</div>
+                  <div class="h-12 rounded bg-sky-300">3</div>
+                  <div class="h-12 rounded bg-sky-400">4</div>
+               </div>
+            </div>
+
+            <!-- arbitrary columns: repeat(), minmax(), auto-fit, auto-fill -->
+            <div class="card">
+               <h3 class="font-medium">Arbitrary tracks</h3>
+               <p class="text-sm text-gray-600">When you need advanced tracks, use arbitrary properties.</p>
+               <div class="mt-3 grid gap-2 [grid-template-columns:repeat(6,minmax(0,1fr))]">
+                  <!-- [grid-template-columns:...] = arbitrary CSS with Tailwind JIT -->
+                  <div class="h-10 rounded bg-rose-100">1</div>
+                  <div class="h-10 rounded bg-rose-200">2</div>
+                  <div class="h-10 rounded bg-rose-300">3</div>
+                  <div class="h-10 rounded bg-rose-400">4</div>
+                  <div class="h-10 rounded bg-rose-500 text-white">5</div>
+                  <div class="h-10 rounded bg-rose-600 text-white">6</div>
+               </div>
+               <div class="mt-4 grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(10rem,1fr))]">
+                  <!-- auto-fit with minmax for responsive wrapping -->
+                  <div class="h-12 rounded bg-teal-100"></div>
+                  <div class="h-12 rounded bg-teal-200"></div>
+                  <div class="h-12 rounded bg-teal-300"></div>
+                  <div class="h-12 rounded bg-teal-400"></div>
+                  <div class="h-12 rounded bg-teal-500"></div>
+               </div>
+            </div>
+         </div>
+
+         <!-- grid-auto-rows / grid-auto-columns -->
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="card">
+               <h3 class="font-medium">grid-auto-rows</h3>
+               <p class="text-sm text-gray-600">Control the size of implicitly created rows.</p>
+               <div class="mt-3 grid grid-cols-3 grid-rows-2 gap-2 auto-rows-fr">
+                  <!-- auto-rows-fr = new rows use 1fr height -->
+                  <div class="h-12 rounded bg-amber-100">1</div>
+                  <div class="h-20 rounded bg-amber-200">2</div>
+                  <div class="h-12 rounded bg-amber-300">3</div>
+                  <div class="rounded bg-amber-400">Implicit row</div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">grid-auto-columns</h3>
+               <p class="text-sm text-gray-600">Control the size of implicitly created columns.</p>
+               <div class="mt-3 grid grid-rows-2 grid-cols-2 gap-2 auto-cols-min grid-flow-col">
+                  <!-- auto-cols-min = implicit columns fit content -->
+                  <!-- grid-flow-col = place items by columns -->
+                  <div class="rounded bg-lime-100 p-2">A</div>
+                  <div class="rounded bg-lime-200 p-2">B long</div>
+                  <div class="rounded bg-lime-300 p-2">C</div>
+                  <div class="rounded bg-lime-400 p-2">D longer text</div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Auto-placement & flow -->
+      <section id="auto-placement" class="mb-12">
+         <h2 class="text-2xl font-semibold">Auto-placement and flow</h2>
+         <p class="mt-1 text-gray-600">Control how items are auto-placed: by rows or columns, and whether dense packing
+            is used.</p>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-3">
+            <div class="card">
+               <h3 class="font-medium">grid-flow-row</h3>
+               <p class="text-sm text-gray-600">Place items in rows (default).</p>
+               <div class="mt-3 grid grid-cols-3 grid-flow-row gap-2">
+                  <div class="h-12 rounded bg-fuchsia-100">1</div>
+                  <div class="h-12 rounded bg-fuchsia-200">2</div>
+                  <div class="h-12 rounded bg-fuchsia-300">3</div>
+                  <div class="h-12 rounded bg-fuchsia-400">4</div>
+                  <div class="h-12 rounded bg-fuchsia-500 text-white">5</div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">grid-flow-col</h3>
+               <p class="text-sm text-gray-600">Place items by columns.</p>
+               <div class="mt-3 grid grid-cols-3 grid-flow-col gap-2">
+                  <div class="h-12 rounded bg-cyan-100">1</div>
+                  <div class="h-12 rounded bg-cyan-200">2</div>
+                  <div class="h-12 rounded bg-cyan-300">3</div>
+                  <div class="h-12 rounded bg-cyan-400">4</div>
+                  <div class="h-12 rounded bg-cyan-500 text-white">5</div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">grid-flow-row-dense</h3>
+               <p class="text-sm text-gray-600">Dense packing back-fills gaps if possible.</p>
+               <div class="mt-3 grid grid-cols-4 grid-flow-row-dense gap-2">
+                  <!-- row/col spans to create gaps -->
+                  <div class="h-12 rounded bg-rose-100 col-span-2">1</div>
+                  <div class="h-12 rounded bg-rose-200">2</div>
+                  <div class="h-12 rounded bg-rose-300">3</div>
+                  <div class="h-12 rounded bg-rose-400 col-span-3">4</div>
+                  <div class="h-12 rounded bg-rose-500 text-white">5</div>
+                  <div class="h-12 rounded bg-rose-600 text-white">6</div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Spanning & start/end -->
+      <section id="spanning" class="mb-12">
+         <h2 class="text-2xl font-semibold">Spanning and start/end lines</h2>
+         <p class="mt-1 text-gray-600">Span items across multiple tracks or place them with start/end line utilities.
+         </p>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="card">
+               <h3 class="font-medium">col-span / row-span</h3>
+               <div class="mt-3 grid grid-cols-4 grid-rows-3 gap-2">
+                  <div class="rounded bg-purple-100 col-span-2 p-2">col-span-2</div>
+                  <div class="rounded bg-purple-200 row-span-2 p-2">row-span-2</div>
+                  <div class="rounded bg-purple-300 p-2">C</div>
+                  <div class="rounded bg-purple-400 col-span-3 p-2">col-span-3</div>
+                  <div class="rounded bg-purple-500 text-white p-2">E</div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">col-start/end, row-start/end</h3>
+               <div class="mt-3 grid grid-cols-6 grid-rows-3 gap-2">
+                  <div class="rounded bg-amber-100 p-2 col-start-2 col-end-5">col 2 → 4</div>
+                  <div class="rounded bg-amber-200 p-2 row-start-2 row-end-4 col-start-1 col-end-3">rows 2→3, cols 1→2
+                  </div>
+                  <div class="rounded bg-amber-300 p-2 col-start-5 col-end-7">col 5 → 6</div>
+                  <div class="rounded bg-amber-400 p-2">D</div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Gaps -->
+      <section id="gaps" class="mb-12">
+         <h2 class="text-2xl font-semibold">Gaps</h2>
+         <p class="mt-1 text-gray-600">Control both axes with <code>gap</code>, or use <code>gap-x</code> and
+            <code>gap-y</code> for independent spacing.</p>
+         <div class="mt-4 grid gap-4 sm:grid-cols-3">
+            <div class="card">
+               <h3 class="font-medium">gap-2</h3>
+               <div class="mt-3 grid grid-cols-3 gap-2">
+                  <div class="h-10 rounded bg-slate-100"></div>
+                  <div class="h-10 rounded bg-slate-200"></div>
+                  <div class="h-10 rounded bg-slate-300"></div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">gap-x-6 gap-y-2</h3>
+               <div class="mt-3 grid grid-cols-3 gap-x-6 gap-y-2">
+                  <div class="h-10 rounded bg-slate-100"></div>
+                  <div class="h-10 rounded bg-slate-200"></div>
+                  <div class="h-10 rounded bg-slate-300"></div>
+                  <div class="h-10 rounded bg-slate-100"></div>
+                  <div class="h-10 rounded bg-slate-200"></div>
+                  <div class="h-10 rounded bg-slate-300"></div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">No gap</h3>
+               <div class="mt-3 grid grid-cols-3">
+                  <div class="h-10 bg-slate-100"></div>
+                  <div class="h-10 bg-slate-200"></div>
+                  <div class="h-10 bg-slate-300"></div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Alignment -->
+      <section id="alignment" class="mb-12">
+         <h2 class="text-2xl font-semibold">Alignment: content, items, self, place-*</h2>
+         <p class="mt-1 text-gray-600">Differentiate container vs. item alignment: content-* aligns the full grid;
+            items-* aligns each cell’s contents; self-* overrides individual cells.</p>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="card">
+               <h3 class="font-medium">justify-content / align-content</h3>
+               <p class="text-sm text-gray-600">Controls free space distribution in the grid container.</p>
+               <div class="mt-3 grid h-40 grid-cols-3 content-center justify-between gap-2 border border-dashed p-2">
+                  <!-- content-center = align-content:center; justify-between = space between columns -->
+                  <div class="h-12 rounded bg-gray-200"></div>
+                  <div class="h-12 rounded bg-gray-300"></div>
+                  <div class="h-12 rounded bg-gray-400"></div>
+               </div>
+            </div>
+
+            <div class="card">
+               <h3 class="font-medium">justify-items / align-items</h3>
+               <p class="text-sm text-gray-600">Align items inside each grid cell.</p>
+               <div class="mt-3 grid grid-cols-3 gap-2 justify-items-center items-end h-32 border border-dashed p-2">
+                  <!-- justify-items-center = center horizontally inside cells -->
+                  <!-- items-end = align-items:end (bottom) -->
+                  <div class="w-12 h-12 rounded bg-zinc-200"></div>
+                  <div class="w-12 h-12 rounded bg-zinc-300"></div>
+                  <div class="w-12 h-12 rounded bg-zinc-400"></div>
+               </div>
+            </div>
+         </div>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="card">
+               <h3 class="font-medium">justify-self / align-self</h3>
+               <p class="text-sm text-gray-600">Override alignment per item.</p>
+               <div class="mt-3 grid grid-cols-3 gap-2 border border-dashed p-2 h-32">
+                  <div class="w-12 h-12 rounded bg-blue-200 justify-self-start self-start"></div>
+                  <div class="w-12 h-12 rounded bg-blue-300 justify-self-center self-center"></div>
+                  <div class="w-12 h-12 rounded bg-blue-400 justify-self-end self-end"></div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">place-content / place-items / place-self</h3>
+               <p class="text-sm text-gray-600">Shorthand pairs of justify-* and align-*.</p>
+               <div class="mt-3 grid grid-cols-3 gap-2 place-content-center border border-dashed p-2 h-32">
+                  <!-- place-content-center = justify-content:center + align-content:center -->
+                  <div class="w-12 h-12 rounded bg-green-200"></div>
+                  <div class="w-12 h-12 rounded bg-green-300"></div>
+                  <div class="w-12 h-12 rounded bg-green-400"></div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Named areas (arbitrary properties) -->
+      <section id="areas" class="mb-12">
+         <h2 class="text-2xl font-semibold">Named areas with grid-template-areas</h2>
+         <p class="mt-1 text-gray-600">Tailwind doesn’t ship a <code>grid-template-areas</code> utility, but you can use
+            arbitrary properties.</p>
+
+         <div class="mt-4 card">
+            <h3 class="font-medium">Header / Sidebar / Main / Footer layout</h3>
+            <div class="mt-3 grid gap-2
+          [grid-template-columns:200px_1fr]
+          [grid-template-rows:auto_1fr_auto]
+          [grid-template-areas:'header_header''sidebar_main''footer_footer']">
+               <!-- Define template areas on the container above -->
+               <header class="rounded bg-indigo-200 p-2 [grid-area:header]">Header</header>
+               <aside class="rounded bg-indigo-100 p-2 [grid-area:sidebar]">Sidebar</aside>
+               <main class="rounded bg-indigo-300 p-2 [grid-area:main]">Main</main>
+               <footer class="rounded bg-indigo-200 p-2 [grid-area:footer]">Footer</footer>
+            </div>
+            <p class="mt-2 text-xs text-gray-600">Note: grid-template-areas support is strong in modern browsers.</p>
+         </div>
+      </section>
+
+      <!-- Section: Subgrid -->
+      <section id="subgrid" class="mb-12">
+         <h2 class="text-2xl font-semibold">Subgrid</h2>
+         <p class="mt-1 text-gray-600">Make a child grid align its rows/cols to the parent tracks using
+            <code>subgrid</code> (modern browser support).</p>
+
+         <div class="mt-4 card">
+            <h3 class="font-medium">Subgrid rows</h3>
+            <div class="mt-3 grid gap-2 [grid-template-rows:100px_1fr_100px]">
+               <div class="rounded bg-rose-100 p-2">Header</div>
+               <div class="rounded bg-rose-200 p-2 grid [grid-template-rows:subgrid] row-span-1">
+                  <!-- Child adopts rows from parent with subgrid -->
+                  <div class="rounded bg-rose-300 p-2">Inner A (subgrid row)</div>
+                  <div class="rounded bg-rose-400 p-2">Inner B (subgrid row)</div>
+                  <div class="rounded bg-rose-300 p-2">Inner C (subgrid row)</div>
+               </div>
+               <div class="rounded bg-rose-100 p-2">Footer</div>
+            </div>
+            <p class="mt-2 text-xs text-gray-600">If a browser lacks subgrid, the child grid will fall back to its own
+               tracks.</p>
+         </div>
+      </section>
+
+      <!-- Section: Responsive grids -->
+      <section id="responsive" class="mb-12">
+         <h2 class="text-2xl font-semibold">Responsive grids</h2>
+         <p class="mt-1 text-gray-600">Use breakpoint prefixes to adapt columns, rows, and gaps across screen sizes.</p>
+
+         <div class="mt-4 card">
+            <h3 class="font-medium">sm: / md: / lg: on grid and gaps</h3>
+            <div
+               class="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-3 md:gap-4 lg:gap-6">
+               <!-- Default 1 col; at ≥640px: 2 cols; ≥768px: 3 cols; ≥1024px: 4 cols -->
+               <div class="h-12 rounded bg-violet-100"></div>
+               <div class="h-12 rounded bg-violet-200"></div>
+               <div class="h-12 rounded bg-violet-300"></div>
+               <div class="h-12 rounded bg-violet-400"></div>
+               <div class="h-12 rounded bg-violet-500"></div>
+               <div class="h-12 rounded bg-violet-600"></div>
+               <div class="h-12 rounded bg-violet-700"></div>
+               <div class="h-12 rounded bg-violet-800"></div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Arbitrary values round-up -->
+      <section id="arbitrary" class="mb-12">
+         <h2 class="text-2xl font-semibold">Arbitrary values for grid</h2>
+         <p class="mt-1 text-gray-600">Unlock “every grid system” feel using arbitrary values when built-in scales
+            aren’t enough.</p>
+
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="card">
+               <h3 class="font-medium">Custom template columns</h3>
+               <div class="mt-3 grid gap-2 [grid-template-columns:120px_2fr_1fr]">
+                  <!-- First track fixed 120px, second 2fr, third 1fr -->
+                  <div class="h-12 rounded bg-emerald-100">120px</div>
+                  <div class="h-12 rounded bg-emerald-200">2fr</div>
+                  <div class="h-12 rounded bg-emerald-300">1fr</div>
+               </div>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">minmax() tracks</h3>
+               <div class="mt-3 grid gap-2 [grid-template-columns:minmax(10ch,1fr)_minmax(20ch,2fr)]">
+                  <!-- Min content size by ch, max by fr -->
+                  <div class="h-12 rounded bg-amber-100">minmax</div>
+                  <div class="h-12 rounded bg-amber-200">minmax wider</div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Section: Animations with grid -->
+      <section id="animations" class="mb-12">
+         <h2 class="text-2xl font-semibold">Animations with grid</h2>
+         <p class="mt-1 text-gray-600">Animate track sizes, gaps, and placements using Tailwind transitions and state
+            variants (hover, focus, peer-checked).</p>
+
+         <!-- Demo 1: Animate between 1 and 3 columns -->
+         <div class="mt-4 card">
+            <h3 class="font-medium">Animate columns (peer toggle)</h3>
+            <label class="flex items-center gap-2">
+               <input type="checkbox" class="peer size-4 accent-indigo-600">
+               <span class="text-sm text-gray-600">Toggle to switch from 1 → 3 columns</span>
+            </label>
+            <div class="mt-3 grid grid-cols-1 gap-3 transition-all duration-700 ease-out
+            peer-checked:grid-cols-3">
+               <!-- transition-all = animate changes; peer-checked:grid-cols-3 overrides when checkbox checked -->
+               <div class="h-12 rounded bg-indigo-100"></div>
+               <div class="h-12 rounded bg-indigo-200"></div>
+               <div class="h-12 rounded bg-indigo-300"></div>
+            </div>
+         </div>
+
+         <!-- Demo 2: Animate gaps -->
+         <div class="mt-4 card">
+            <h3 class="font-medium">Animate gaps (hover)</h3>
+            <div class="mt-3 grid grid-cols-3 gap-2 transition-all duration-500 hover:gap-8">
+               <!-- hover:gap-8 enlarges spacing smoothly -->
+               <div class="h-12 rounded bg-teal-100"></div>
+               <div class="h-12 rounded bg-teal-200"></div>
+               <div class="h-12 rounded bg-teal-300"></div>
+            </div>
+         </div>
+
+         <!-- Demo 3: Animate explicit template columns using arbitrary values -->
+         <div class="mt-4 card">
+            <h3 class="font-medium">Animate template columns (hover)</h3>
+            <div class="mt-3 grid gap-2 transition-all duration-700 
+          [grid-template-columns:100px_1fr] hover:[grid-template-columns:200px_1fr]">
+               <!-- Arbitrary property switches from 100px to 200px smoothly -->
+               <div class="h-12 rounded bg-rose-200"></div>
+               <div class="h-12 rounded bg-rose-300"></div>
+            </div>
+         </div>
+
+         <!-- Demo 4: Animate reordering with order + dense -->
+         <div class="mt-4 card">
+            <h3 class="font-medium">Reordering & dense packing</h3>
+            <div class="mt-3 grid grid-cols-4 grid-flow-row-dense gap-2 transition-all duration-700">
+               <!-- Using order on grid items influences auto-placement sequence -->
+               <div class="h-12 rounded bg-amber-200 col-span-2 order-2">A (order-2)</div>
+               <div class="h-12 rounded bg-amber-300 order-1">B (order-1)</div>
+               <div class="h-12 rounded bg-amber-400 col-span-3 order-3">C (order-3)</div>
+               <div class="h-12 rounded bg-amber-500 text-white order-0">D (order-0)</div>
+            </div>
+            <p class="mt-2 text-xs text-gray-600">Note: In Grid, order affects auto-placement order (explicit placement
+               still wins).</p>
+         </div>
+      </section>
+
+      <!-- Section: Flex vs Grid (quick link to your earlier list) -->
+      <section id="flex-vs-grid" class="mb-12">
+         <h2 class="text-2xl font-semibold">Flex vs Grid (quick mapping)</h2>
+         <p class="mt-1 text-gray-600">You listed Flex props too. Here’s a quick mapping so you know when to choose
+            each.</p>
+         <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="card">
+               <h3 class="font-medium">Use Grid when</h3>
+               <ul class="mt-2 list-disc pl-6 text-sm text-gray-700">
+                  <li>You need two‑dimensional layouts (rows and columns).</li>
+                  <li>You want explicit cell placement or template areas.</li>
+                  <li>You want equal-height rows by design (auto-rows-fr).</li>
+               </ul>
+            </div>
+            <div class="card">
+               <h3 class="font-medium">Use Flex when</h3>
+               <ul class="mt-2 list-disc pl-6 text-sm text-gray-700">
+                  <li>One‑dimensional flow fits (row OR column).</li>
+                  <li>You need content-driven wrap and spacing behaviors.</li>
+                  <li>You want straightforward alignment along a main axis.</li>
+               </ul>
+            </div>
+         </div>
+         <p class="mt-3 text-xs text-gray-600">Both support alignment (justify/align), gaps, and ordering. Grid excels
+            at templates and 2D control; Flex excels at simple flows.</p>
+      </section>
+
+      <footer class="mt-16 text-center text-sm text-gray-500">
+         Built with Tailwind — save this file and tweak each section to master Grid.
+      </footer>
+   </div>
+</body>
+
+</html>
