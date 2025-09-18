@@ -26,7 +26,9 @@ This repository contains multiple Tailwind CSS projects demonstrating grid layou
 
 ## 📸 Preview
 
-![Grid Layout Demo](assets/screenshots/tailwind_grid1.png)
+## 🌐 Live Demo
+
+👉 [View Full Grid Layout Demo](https://saad-abu-sami.github.io/Tailwind-CSS-/tailwind_grid1.html)
 
 > `tailwind_grid1.html` showcases a responsive grid layout using Tailwind’s `grid`, `gap`, and `place-items` utilities.
 
